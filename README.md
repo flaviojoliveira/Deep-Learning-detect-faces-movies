@@ -8,13 +8,13 @@
 
 ## Bio - Deep01
 
-<lorem>
+Inserir conteúdo
 
 ## Bio - Deep02
 
-<lorem>
+Inserir conteúdo
 
 ## Bio - Deep03
 
-<lorem>
+Inserir conteúdo
 
