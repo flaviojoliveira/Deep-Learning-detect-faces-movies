@@ -4,11 +4,12 @@
 
 ### Exemplos de aplicações em Python para reconhecimento de imagens utilizando Deep Learning
 
-deep.png
+
+
 
 ## Images
 
-![This is a alt text.](/img/deep.png "Reconhecimento de Faces em vídeos com deep learning")
+![deep](/img/deep.png "Reconhecimento de Faces em vídeos com deep learning")
 
 ## Bio - Deep01
 #inserir imagem ou gif
