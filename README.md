@@ -9,9 +9,7 @@
 
 ## Images
 
-![deep](/img/deep.png "Reconhecimento de Faces em vídeos com deep learning")
-
-<img src="/img/deep.png" alt="deep" width="200"/>
+<img src="/img/deep.png" alt="Reconhecimento de Faces em vídeos com deep learning" width="200"/>
 
 
 ## Bio - Deep01
