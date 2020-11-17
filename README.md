@@ -1,9 +1,8 @@
 ## Estudos em Inteligência Artificial utilizando Python
 
+<img src="/img/deep.png" alt="Reconhecimento de Faces em vídeos com deep learning" width="200" align=middle/>
+
 ### Exemplos de aplicações em Python para reconhecimento de imagens utilizando Deep Learning
-
-<img src="/img/deep.png" alt="Reconhecimento de Faces em vídeos com deep learning" width="200"/>
-
 
 
 ## Bio - Deep01
