@@ -1,5 +1,6 @@
 # Deep Learning - Detectando Faces em Videos
 
+##### Desenvolvido por [Jhonata Souza Costa](https://github.com/einasota)
 ##### Colaboradores: [Daniel Queiroz](https://github.com/DanielSQueiroz) e [Rafael Buchacra](https://github.com/rafael-buchacra)
 
 ## Atividade Avaliativa
