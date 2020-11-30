@@ -1,80 +1,41 @@
-## Estudos em Inteligência Artificial utilizando Python
+# Deep Learning - Detectando Faces em Videos
 
-<img src="/img/deep.png" alt="Reconhecimento de Faces em vídeos com deep learning" width="200" align=middle/>
+#### Colaboradores: [Daniel Queiroz](https://github.com/DanielSQueiroz) e Rafael Buchacra
 
-### Exemplos de aplicações em Python para reconhecimento de imagens utilizando Deep Learning
+## Atividade Avaliativa
 
+1. Resquisitos
+2. Aplicação
+3. Exemplo
 
-## Bio - Deep01
-#inserir imagem ou gif
+### 1. Requisitos
 
-> The overriding design goal for Markdown's
-> formatting syntax is to make it as readable
-> as possible. The idea is that a
-> Markdown-formatted document should be
-> publishable as-is, as plain text, without
-> looking like it's been marked up with tags
-> or formatting instructions.
+ - Python 3+
+ - Ananconda 3+
 
-### Installation
+    ##### Preparando o Ambiente
+    Após a instalação do **python** e do **anaconda** é preciso rodar os seguintes codigos no anaconda prompt.
+    
+    ![Anaconda Prompt Windows](https://i.imgur.com/aYMQdrx.png)
+    
+    E execute o seguinte codigo:
+    
+    ```conda create -n image-detection anaconda```
+    
+    Após a conclusão do processo execute o proximo comando:
+    
+    ```conda activate image-detection```
+    
+    E em seguida instale o OpenCV:
+    
+    ```conda install opencv```
+    
 
-Dillinger requires [Node.js](https://nodejs.org/) v4+ to run.
+### 2. Aplicação
 
-Install the dependencies and devDependencies and start the server.
+##### Execução
+Após concluir a instalação dos requisitos, é necessario usar o ipython para conseguir utilizar o codigo. No proprio console do Anaconda entre no diretorio onde esta localizado o arquivo e digite o seguinte codigo: `ipython detface.py`.
 
-```sh
-$ cd dillinger
-$ npm install -d
-$ node app
-```
-## Bio - Deep02
-
-Inserir conteúdo / informações sobre os colabordores e atividade realizada.
-
-#inserir imagem ou gif
-
-> The overriding design goal for Markdown's
-> formatting syntax is to make it as readable
-> as possible. The idea is that a
-> Markdown-formatted document should be
-> publishable as-is, as plain text, without
-> looking like it's been marked up with tags
-> or formatting instructions.
-
-### Installation
-
-Dillinger requires [Node.js](https://nodejs.org/) v4+ to run.
-
-Install the dependencies and devDependencies and start the server.
-
-```sh
-$ cd dillinger
-$ npm install -d
-$ node app
-```
-
-## Bio - Deep03
-
-Inserir conteúdo / informações sobre os colabordores e atividade realizada.
-
-#inserir imagem ou gif
-
-> The overriding design goal for Markdown's
-> formatting syntax is to make it as readable
-> as possible. The idea is that a
-> Markdown-formatted document should be
-> publishable as-is, as plain text, without
-> looking like it's been marked up with tags
-> or formatting instructions.
-
-### Installation
-
-Dillinger requires [Node.js](https://nodejs.org/) v4+ to run.
-
-Install the dependencies and devDependencies and start the server.
-
-```sh
-$ cd dillinger
-$ npm install -d
-$ node app
-```
+### 3. Exemplo: 
+![Gif de Exemplo](https://media.giphy.com/media/1s2dz6G41WDRgbPhYE/giphy.gif)
+ 
