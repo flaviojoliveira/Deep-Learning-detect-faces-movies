@@ -1,0 +1,111 @@
+<html>
+<head>
+<title>reconhecimento_em_video.py</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #808080;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #cc7832;}
+.s3 { color: #6a8759;}
+.s4 { color: #6897bb;}
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+reconhecimento_em_video.py</font>
+</center></td></tr></table>
+<pre><span class="s0">#rodar com pyton 3.6(keras-facenet-master)</span>
+
+<span class="s2">import </span><span class="s1">numpy </span><span class="s2">as </span><span class="s1">np</span>
+<span class="s2">from </span><span class="s1">PIL </span><span class="s2">import </span><span class="s1">Image</span>
+<span class="s2">from </span><span class="s1">mtcnn.mtcnn </span><span class="s2">import </span><span class="s1">MTCNN</span>
+<span class="s2">from </span><span class="s1">tensorflow.keras.models </span><span class="s2">import </span><span class="s1">load_model</span>
+<span class="s2">import </span><span class="s1">cv2</span>
+
+
+
+<span class="s1">pessoas = [</span><span class="s3">&quot;DJALMA&quot;</span><span class="s2">, </span><span class="s3">&quot;MAYKI&quot;</span><span class="s1">]</span>
+<span class="s1">num_classes = len(pessoas)</span>
+
+<span class="s1">cap = cv2.VideoCapture(</span><span class="s4">0</span><span class="s1">)</span><span class="s0">#0</span>
+
+<span class="s1">detector = MTCNN()</span>
+<span class="s1">facenet = load_model(</span><span class="s3">&quot;facenet_keras.h5&quot;</span><span class="s1">)</span>
+<span class="s1">model = load_model(</span><span class="s3">&quot;modelo_faces.h5&quot;</span><span class="s1">)</span>
+
+<span class="s2">def </span><span class="s1">extract_face(image</span><span class="s2">, </span><span class="s1">box</span><span class="s2">, </span><span class="s1">required_size=(</span><span class="s4">160</span><span class="s2">,</span><span class="s4">160</span><span class="s1">)):</span>
+
+    <span class="s1">pixels = np.asarray(image)</span>
+
+    <span class="s1">x1</span><span class="s2">, </span><span class="s1">y1</span><span class="s2">, </span><span class="s1">width</span><span class="s2">, </span><span class="s1">height = box</span>
+    <span class="s1">x2</span><span class="s2">, </span><span class="s1">y2 = x1 + width</span><span class="s2">, </span><span class="s1">y1 + height</span>
+
+    <span class="s1">face = pixels[y1:y2</span><span class="s2">, </span><span class="s1">x1:x2]</span>
+
+    <span class="s1">image = Image.fromarray(face)</span>
+    <span class="s1">image = image.resize(required_size)</span>
+    <span class="s2">return </span><span class="s1">np.asarray(image)</span>
+
+
+<span class="s2">def </span><span class="s1">get_embedding(facenet</span><span class="s2">, </span><span class="s1">face_pixels):</span>
+    <span class="s1">face_pixels = face_pixels.astype(</span><span class="s3">'float32'</span><span class="s1">)</span>
+
+    <span class="s1">mean</span><span class="s2">, </span><span class="s1">std = face_pixels.mean()</span><span class="s2">, </span><span class="s1">face_pixels.std()</span>
+    <span class="s1">face_pixels = (face_pixels - mean) / std</span>
+
+    <span class="s1">samples = np.expand_dims(face_pixels</span><span class="s2">, </span><span class="s1">axis=</span><span class="s4">0</span><span class="s1">)</span>
+
+    <span class="s1">yhat = facenet.predict(samples)</span>
+
+    <span class="s2">return </span><span class="s1">yhat[</span><span class="s4">0</span><span class="s1">]</span>
+
+
+
+
+
+<span class="s2">while True</span><span class="s1">:</span>
+    <span class="s1">_</span><span class="s2">, </span><span class="s1">frame = cap.read()</span>
+    <span class="s1">faces = detector.detect_faces(frame)</span>
+
+    <span class="s2">for </span><span class="s1">face </span><span class="s2">in </span><span class="s1">faces:</span>
+        <span class="s1">confidence = face[</span><span class="s3">'confidence'</span><span class="s1">] * </span><span class="s4">100</span>
+
+        <span class="s2">if </span><span class="s1">confidence &gt;= </span><span class="s4">98</span><span class="s1">:</span>
+            <span class="s1">x1</span><span class="s2">, </span><span class="s1">y1</span><span class="s2">, </span><span class="s1">w</span><span class="s2">, </span><span class="s1">h = face[</span><span class="s3">'box'</span><span class="s1">]</span>
+            <span class="s1">face = extract_face(frame</span><span class="s2">, </span><span class="s1">face[</span><span class="s3">'box'</span><span class="s1">])</span>
+
+            <span class="s1">face = face.astype(</span><span class="s3">&quot;float32&quot;</span><span class="s1">) / </span><span class="s4">255</span>
+            <span class="s1">emb = get_embedding(facenet</span><span class="s2">, </span><span class="s1">face)</span>
+            <span class="s1">tensor = np.expand_dims(emb</span><span class="s2">, </span><span class="s1">axis=</span><span class="s4">0</span><span class="s1">)</span>
+
+            <span class="s1">classe = model.predict_classes(tensor)[</span><span class="s4">0</span><span class="s1">]</span>
+            <span class="s1">prob = model.predict_proba(tensor)</span>
+            <span class="s1">prob = prob[</span><span class="s4">0</span><span class="s1">][classe] * </span><span class="s4">100</span>
+            <span class="s1">user = str(pessoas[classe]).upper()</span>
+
+            <span class="s1">color = (</span><span class="s4">192</span><span class="s2">, </span><span class="s4">255</span><span class="s2">, </span><span class="s4">119</span><span class="s1">)</span><span class="s0">#BGR</span>
+
+            <span class="s1">cv2.rectangle(frame</span><span class="s2">, </span><span class="s1">(x1</span><span class="s2">, </span><span class="s1">y1)</span><span class="s2">, </span><span class="s1">(x1+w</span><span class="s2">, </span><span class="s1">y1+h)</span><span class="s2">, </span><span class="s1">color</span><span class="s2">, </span><span class="s4">2</span><span class="s1">)</span>
+
+            <span class="s1">font = cv2.FONT_HERSHEY_SIMPLEX</span>
+            <span class="s1">font_scale = </span><span class="s4">0.5</span>
+
+            <span class="s1">cv2.putText(frame</span><span class="s2">, </span><span class="s1">user</span><span class="s2">, </span><span class="s1">(x1</span><span class="s2">, </span><span class="s1">y1-</span><span class="s4">10</span><span class="s1">)</span><span class="s2">, </span><span class="s1">font</span><span class="s2">, </span><span class="s1">fontScale=font_scale</span><span class="s2">, </span><span class="s1">color=color</span><span class="s2">, </span><span class="s1">thickness=</span><span class="s4">1</span><span class="s1">)</span>
+
+    <span class="s1">cv2.imshow(</span><span class="s3">&quot;FACE RECOGNITION&quot;</span><span class="s2">, </span><span class="s1">frame)</span>
+    <span class="s1">key = cv2.waitKey(</span><span class="s4">1</span><span class="s1">)</span>
+
+    <span class="s2">if </span><span class="s1">key==</span><span class="s4">27</span><span class="s1">:</span>
+        <span class="s2">break</span>
+
+<span class="s1">cap.release()</span>
+<span class="s1">cv2.destroyAllWindows()</span>
+
+
+
+
+</pre>
+</body>
+</html>
