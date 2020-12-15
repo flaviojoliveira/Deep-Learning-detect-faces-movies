@@ -1,6 +1,6 @@
 # Deep Learning - Detectando Faces em Videos
 
-#### Colaboradores: [Daniel Queiroz](https://github.com/DanielSQueiroz) e Rafael Buchacra
+#### Colaboradores: [Daniel Queiroz](https://github.com/DanielSQueiroz) e Rafael Buchacra [link](...)
 
 ## Atividade Avaliativa
 
